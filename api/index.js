@@ -5,6 +5,12 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const { default: mongoose } = require('mongoose');
+const User = require('./models/User.js');
+
+const bcrypt = require('bcryptjs')
+const bcryptSalt = bcrypt.genSaltSync(10);
+
+
 require('dotenv').config()
 
 app.use(express.json());
@@ -22,9 +28,15 @@ app.get('/test', (req, res) => {
 });
 
 
-app.post('/register', (req,res) => {
+app.post('/register', async (req,res) => {
   const {name, email, password} = req.body;
-  res.json({name, email, password});
+  const newUser = await User.create ({
+    name,
+    email,
+    password:bcrypt.hashSync(password, bcryptSalt),
+  })
+
+  res.json(newUser);
 })
 // Start the server and listen for connections on port 4000
 app.listen(4000, () => {
