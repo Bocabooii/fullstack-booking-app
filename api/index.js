@@ -4,7 +4,8 @@ const express = require('express');
 // Create an instance of an Express application
 const app = express();
 const cors = require('cors');
-
+const { default: mongoose } = require('mongoose');
+require('dotenv').config()
 
 app.use(express.json());
 app.use(cors({
@@ -12,6 +13,7 @@ app.use(cors({
   origin: 'http://localhost:5173'
 }));
 
+mongoose.connect(process.env.MONGO_URL)
 
 // Define a route handler for GET requests to the /test path
 app.get('/test', (req, res) => {
