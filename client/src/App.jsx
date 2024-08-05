@@ -9,6 +9,7 @@ import RegisterPage from './pages/RegisterPage.jsx';
 import axios from 'axios';
 
 axios.defaults.baseURL = 'http://localhost:4000'
+axios.defaults.withCredentials = true;
 
 // Set up routes for the app: each URL path is linked to a specific component, defining what content to render for each route
 
