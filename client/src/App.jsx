@@ -7,6 +7,7 @@ import LoginPage from './pages/LoginPage.jsx';
 import Layout from './Layout.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
 import axios from 'axios';
+import { UserContextProvider } from './UserContext.jsx';
 
 axios.defaults.baseURL = 'http://localhost:4000'
 axios.defaults.withCredentials = true;
@@ -18,15 +19,17 @@ axios.defaults.withCredentials = true;
 function App() {
 
   return (
-    <Routes>
-      <Route path='/' element={<Layout />}>
-        {/* Our first route is imported from our IndexPage.jsx file and rendered into the app */}
-        <Route index element={<IndexPage />} />
-        {/* Our second route is imported from our LoginPage.jsx file and rendered into the app */}
-        <Route path='/login' element={<LoginPage />} /> 
-        <Route path='/register' element={<RegisterPage />} /> 
-      </Route>
-    </Routes>
+    <UserContextProvider>
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          {/* Our first route is imported from our IndexPage.jsx file and rendered into the app */}
+          <Route index element={<IndexPage />} />
+          {/* Our second route is imported from our LoginPage.jsx file and rendered into the app */}
+          <Route path='/login' element={<LoginPage />} /> 
+          <Route path='/register' element={<RegisterPage />} /> 
+        </Route>
+      </Routes>
+    </UserContextProvider>
    
   )
 }

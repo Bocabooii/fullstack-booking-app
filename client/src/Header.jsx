@@ -1,8 +1,11 @@
 import { FaEarthAmericas, FaBars, FaCircleUser, } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "./UserContext";
 
 export default function Header() {
+  const {user} = useContext(UserContext);
     return (
 <div>
     <header className='flex justify-between'>
@@ -24,6 +27,11 @@ export default function Header() {
         {/* Code below links FaCircleUser to /login path. Meaning when clicked, will direct url to /login */}
         <Link to={'/login'}>
         <FaCircleUser size={'18px'}/>
+        {!!user && (
+          <div>
+            {user.name}
+          </div>
+        )}
         </Link>
       </div>
     </header>
